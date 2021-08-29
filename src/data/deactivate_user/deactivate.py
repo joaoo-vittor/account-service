@@ -13,7 +13,7 @@ class DeactivateUser(DeactivateUserInterface):
     def deactivate_user(
         self, user_id: int, user_name: str, password: str
     ) -> Dict[bool, User]:
-        """Select User by user id and user name
+        """Deactivate User
         :params - user_id: id of the user
                 - user_name: user name of User
                 - password: password to verify deactivate

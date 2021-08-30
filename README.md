@@ -3,6 +3,7 @@
   <h4>
     <strong>Status do projeto: </strong> <i>Incompleto</i> 🚧 ⚠️ ⚠️
   </h4>
+  <a href="https://wakatime.com/badge/github/joaoo-vittor/account-service"><img src="https://wakatime.com/badge/github/joaoo-vittor/account-service.svg"></a>
 </div>
 
 ----

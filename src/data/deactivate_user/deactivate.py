@@ -32,4 +32,6 @@ class DeactivateUser(DeactivateUserInterface):
                 user_name=user_name, user_id=user_id, password=password
             )
 
-        return {"Success": validate_entry, "Data": response}
+        if response:
+            return {"Success": validate_entry, "Data": response}
+        return {"Success": False, "Data": response}

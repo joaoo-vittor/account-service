@@ -4,7 +4,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: 'pytest src/data/ -v -s'
+    command: 'pytest src/presenters/controllers/activate_user/ -v -s'
+    # command: 'alembic upgrade head' # executar migration
     ports:
       - 8001:5000
     volumes: 

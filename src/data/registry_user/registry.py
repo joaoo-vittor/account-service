@@ -25,4 +25,6 @@ class RegistryUser(RegistryUserInterface):
                 user_name=user_name, password=password
             )
 
-        return {"Success": validate_entry, "Data": response}
+        if response:
+            return {"Success": validate_entry, "Data": response}
+        return {"Success": False, "Data": response}

@@ -46,6 +46,7 @@ class UserRepository(UserRepositoryInterface):
         """
         try:
             data = None
+
             if user_id and not user_name:
                 with DBConnectionHandler() as connection:
                     data = (
@@ -77,7 +78,7 @@ class UserRepository(UserRepositoryInterface):
             )
 
         except NoResultFound:
-            return []
+            return None
         except:
             connection.session.rollback()
             raise
@@ -119,7 +120,8 @@ class UserRepository(UserRepositoryInterface):
                         return True
 
             return None
-
+        except NoResultFound:
+            return None
         except:
             connection.session.rollback()
             raise
@@ -152,6 +154,8 @@ class UserRepository(UserRepositoryInterface):
 
             return None
 
+        except NoResultFound:
+            return None
         except:
             connection.session.rollback()
             raise
@@ -184,6 +188,8 @@ class UserRepository(UserRepositoryInterface):
 
             return None
 
+        except NoResultFound:
+            return None
         except:
             connection.session.rollback()
             raise

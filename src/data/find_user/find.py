@@ -24,5 +24,6 @@ class FindUser(FindUserInterface):
             response = self.user_repository.selected_user(
                 user_id=user_id, user_name=user_name
             )
-
-        return {"Success": validate_entry, "Data": response}
+        if response:
+            return {"Success": validate_entry, "Data": response}
+        return {"Success": False, "Data": response}

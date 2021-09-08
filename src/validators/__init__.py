@@ -1,1 +1,4 @@
 from .activate_user_route import validate_activate_user_route
+from .find_user_route import validate_find_user_route
+from .registry_user_route import validate_registry_user_route
+from .update_user_route import validate_update_user_route

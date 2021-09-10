@@ -12,9 +12,12 @@ def flask_adapter_find_user(request: any, api_route: Type[Route]) -> any:
     """
 
     try:
-        # query_string_params = request.get_json()
-        query_string_params = request.args.to_dict()
         params = {}
+
+        if request.args.to_dict():
+            query_string_params = request.args.to_dict()
+        else:
+            query_string_params = request.get_json()
 
         if "user_name" in query_string_params.keys():
             params["user_name"] = str(query_string_params["user_name"])

@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     # command: 'pytest src/presenters/controllers/updated_user/ -v -s'
-    # command: 'python3 server.py'
+    # command: 'python3 server.py' ecommerce-account-service-jvbs
     command: 'gunicorn -w 5 -b 0.0.0.0:5000 "server:create_app()"'
     # command: 'alembic upgrade head' # executar migration
     ports:

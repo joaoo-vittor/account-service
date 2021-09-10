@@ -22,12 +22,27 @@ class FindUserController(RouteInterface):
             validate_query = validate_find_user_route(http_request.query)
 
             if validate_query:
-                user_id = http_request.query["user_id"]
-                user_name = http_request.query["user_name"]
 
-                response = self.find_user_use_case.by_id_and_name(
-                    user_id=user_id, user_name=user_name
-                )
+                if "user_id" in http_request.query.keys():
+                    user_id = http_request.query["user_id"]
+
+                    response = self.find_user_use_case.by_id(user_id=user_id)
+
+                if "user_name" in http_request.query.keys():
+                    user_name = http_request.query["user_name"]
+
+                    response = self.find_user_use_case.by_name(user_name=user_name)
+
+                if (
+                    "user_name" in http_request.query.keys()
+                    and "user_id" in http_request.query.keys()
+                ):
+                    user_name = http_request.query["user_name"]
+                    user_id = http_request.query["user_id"]
+
+                    response = self.find_user_use_case.by_id_and_name(
+                        user_name=user_name, user_id=user_id
+                    )
 
             else:
                 response = {"Success": False, "Data": None}

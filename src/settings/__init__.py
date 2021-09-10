@@ -1,1 +1,1 @@
-from .envs import SQLALCHEMY_DATABASE_URI
+from .envs import SQLALCHEMY_DATABASE_URI, HASH

@@ -1,0 +1,3 @@
+from .api_adapter_registry_user import flask_adapter_registry_user
+from .api_adapter_find_user import flask_adapter_find_user
+from .api_adapter_update_user import flask_adapter_update_user

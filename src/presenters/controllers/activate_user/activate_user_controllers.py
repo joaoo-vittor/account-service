@@ -24,7 +24,7 @@ class ActivateController(RouteInterface):
             if validate_query:
                 user_id = http_request.query["user_id"]
                 user_name = http_request.query["user_name"]
-                password = http_request.query["user_name"]
+                password = http_request.query["password"]
 
                 response = self.activate_user_use_case.activate_user(
                     user_id=user_id, user_name=user_name, password=password

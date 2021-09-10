@@ -1,3 +1,5 @@
 from .registery_use_composite import registry_user_composite
 from .find_user_composite import find_user_composite
 from .update_user_composite import update_user_composite
+from .deactivate_user_composite import deactivate_user_composite
+from .activate_user_composite import activate_user_composite

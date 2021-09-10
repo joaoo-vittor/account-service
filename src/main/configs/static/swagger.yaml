@@ -228,7 +228,7 @@
                   $ref: "#/components/schemas/returnError500"
     
     /update:
-      post:
+      put:
         tags:
         - "Account Service"
         summary: "Informações de um usuário no sistema."

@@ -125,7 +125,7 @@ def user_info():
     )
 
 
-@api_route_bp.route("/api/v1/update", methods=["POST"])
+@api_route_bp.route("/api/v1/update", methods=["PUT"])
 def update_user():
     """update user route"""
 

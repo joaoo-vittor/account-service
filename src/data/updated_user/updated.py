@@ -10,7 +10,7 @@ class UpdatedUser(UpdateUserInterface):
     def __init__(self, user_repository: Type[UserRepository]) -> None:
         self.user_repository = user_repository
 
-    def update_user(
+    def updated_user(
         self, user_id: int, user_name: str, old_password: str, new_data: dict = None
     ) -> Dict[bool, User]:
         """Update User by user id and user name
@@ -37,4 +37,6 @@ class UpdatedUser(UpdateUserInterface):
                 new_data=new_data,
             )
 
-        return {"Success": validate_entry, "Data": response}
+        if response:
+            return {"Success": validate_entry, "Data": response}
+        return {"Success": False, "Data": None}

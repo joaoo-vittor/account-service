@@ -162,7 +162,8 @@ class UserRepository(UserRepositoryInterface):
                         .one()
                     )
 
-                    if user_verify.password == password:
+                    pwhash = f"{HASH}{user_verify.password}"
+                    if check_password_hash(pwhash, password):
                         connection.session.query(UserModel).filter_by(
                             id=user_id, user_name=user_name
                         ).update({"active": 0}, synchronize_session=False)
@@ -198,7 +199,8 @@ class UserRepository(UserRepositoryInterface):
                         .one()
                     )
 
-                    if user_verify.password == password:
+                    pwhash = f"{HASH}{user_verify.password}"
+                    if check_password_hash(pwhash, password):
                         connection.session.query(UserModel).filter_by(
                             id=user_id, user_name=user_name
                         ).update({"active": 1}, synchronize_session=False)

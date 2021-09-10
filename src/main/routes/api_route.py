@@ -5,11 +5,15 @@ from src.main.adapter import (
     flask_adapter_registry_user,
     flask_adapter_find_user,
     flask_adapter_update_user,
+    flask_adapter_deactivate_user,
+    flask_adapter_activate_user,
 )
 from src.main.composer import (
     registry_user_composite,
     find_user_composite,
     update_user_composite,
+    deactivate_user_composite,
+    activate_user_composite,
 )
 from src.settings import HASH
 
@@ -37,7 +41,7 @@ def register_user():
             },
         }
 
-        return jsonify({"data": message}), response.status_code
+        return jsonify({"data": message}), 201
 
     # handling Errors
     return (
@@ -55,11 +59,15 @@ def login_user():
     response = flask_adapter_find_user(request=request, api_route=find_user_composite())
 
     if response.status_code < 300:
-        password = request.args.to_dict()["password"]
+        if request.args.to_dict():
+            password = request.args.to_dict()["password"]
+        else:
+            password = request.get_json()["password"]
+
         pwhash = f"{HASH}{response.body.password}"
         valid_pw = check_password_hash(pwhash, password)
 
-        if valid_pw:
+        if valid_pw and response.body.active:
             token_de_acesso = create_access_token(response.body.user_name)
 
             message = {
@@ -88,15 +96,23 @@ def user_info():
 
     if response.status_code < 300:
 
-        message = {
-            "type": "users",
-            "id": response.body.id,
-            "attributes": {
-                "name": response.body.user_name,
-                "email": response.body.email,
-                "active": response.body.active,
-            },
-        }
+        if response.body.active == 1:
+            message = {
+                "type": "users",
+                "id": response.body.id,
+                "attributes": {
+                    "name": response.body.user_name,
+                    "email": response.body.email,
+                    "active": response.body.active,
+                },
+            }
+
+        else:
+            message = {
+                "type": "users",
+                "id": response.body.id,
+                "message": "deactivated account.",
+            }
 
         return jsonify(message), response.status_code
 
@@ -122,6 +138,58 @@ def update_user():
         message = {
             "type": "users",
             "updated": response.body,
+        }
+
+        return jsonify(message), response.status_code
+
+    # handling Errors
+    return (
+        jsonify(
+            {"error": {"status": response.status_code, "title": response.body["error"]}}
+        ),
+        response.status_code,
+    )
+
+
+@api_route_bp.route("/api/v1/deactive_user", methods=["POST"])
+def deactive_user_user():
+    """deactive user user route"""
+
+    response = flask_adapter_deactivate_user(
+        request=request, api_route=deactivate_user_composite()
+    )
+
+    if response.status_code < 300:
+
+        message = {
+            "type": "users",
+            "deactivated": response.body,
+        }
+
+        return jsonify(message), response.status_code
+
+    # handling Errors
+    return (
+        jsonify(
+            {"error": {"status": response.status_code, "title": response.body["error"]}}
+        ),
+        response.status_code,
+    )
+
+
+@api_route_bp.route("/api/v1/active_user", methods=["POST"])
+def active_user_user():
+    """active user user route"""
+
+    response = flask_adapter_activate_user(
+        request=request, api_route=activate_user_composite()
+    )
+
+    if response.status_code < 300:
+
+        message = {
+            "type": "users",
+            "activated": response.body,
         }
 
         return jsonify(message), response.status_code

@@ -27,7 +27,7 @@ class UpdateUserController(RouteInterface):
                 old_password = http_request.query["old_password"]
                 new_data = http_request.query["new_data"]
 
-                response = self.update_user_use_case.update_user(
+                response = self.update_user_use_case.updated_user(
                     user_id=user_id,
                     user_name=user_name,
                     old_password=old_password,

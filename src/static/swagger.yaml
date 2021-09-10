@@ -1,0 +1,495 @@
+  openapi: "3.0.1"
+  
+  info:
+    description: "Documentação das rotas da SEFAZ API"
+    version: "1.0.0"
+    title: "SEFAZ API"
+  
+  
+  servers:
+    - url: https://ecommerce-account-service-jvbs.herokuapp.com/api/v1
+      description: Production server
+  
+    - url: http://localhost:5000/api/v1
+      description: Development server
+  
+  
+  tags:
+  - name: "Account Service"
+    description: "Serviço de login"
+  
+  
+  paths:
+  
+    /registry:
+      post:
+        tags:
+        - "Account Service"
+        summary: "Registra um usuário no sistema."
+        description: "Rota responsável por registrar um usuário no sistema."
+        parameters:
+          - name: "user_name"
+            in: "header"
+            required: true
+            description: "nome de usuário"
+            schema:
+              type: "string"
+          - name: "password"
+            in: "header"
+            description: "senha de usuário"
+            required: true
+            schema:
+              type: "string"
+          
+            
+        responses:
+          200:
+            description: "successful operation"
+            content:
+              application/json:
+                schema:
+                  type: "object"
+                  properties:
+                    data:
+                      type: "object"
+                      properties:
+                        id:
+                          type: "integer"
+                          example: 1
+                        type: 
+                          type: "string"
+                          example: "users"
+                        attributes:
+                          type: "object"
+                          properties:
+                            active:
+                              type: "boolean"
+                              example: true
+                            email:
+                              type: "string"
+                              example: "my@email.com"
+                            name:
+                              type: "string"
+                              example: "myusername"
+              
+    
+                    
+                  
+                
+          "422":
+            description: "Indica que o servidor entende o tipo de conteúdo da entidade da requisição, e a sintaxe da requisição esta correta, mas não foi possível processar as instruções presentes."
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnError422"
+              
+          "400":
+            description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnError400"
+            
+          "500":
+            description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnError500"
+  
+              
+    /login:
+      post:
+        tags:
+        - "Account Service"
+        summary: "Login um usuário no sistema."
+        description: "Rota responsável por logar um usuário no sistema."
+        parameters:
+          - name: "user_name"
+            in: "header"
+            required: true
+            description: "nome de usuário"
+            schema:
+              type: "string"
+          - name: "password"
+            in: "header"
+            description: "senha de usuário"
+            required: true
+            schema:
+              type: "string"
+          
+            
+        responses:
+          200:
+            description: "successful operation"
+            content:
+              application/json:
+                schema:
+                  type: "object"
+                  properties:
+                    access_token:
+                      type: "object"
+                      example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTYzMTI1MjExMiwianRpIjoiM2YwZGVmMjktNTE2NC00OGNkLWE5MmEtNDhkY2E3MWVkN2Q1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImpvYW9vLXZpdHRvcjAwNyIsIm5iZiI6MTYzMTI1MjExMiwiZXhwIjoxNjMxMjUzMDEyfQ.NFEoQ9BHsXEWYTLXCAAx7CTM29uGj3xybRjST7e1GUI"
+                    id:
+                      type: "integer"
+                      example: 1
+                
+          "422":
+            description: "Indica que o servidor entende o tipo de conteúdo da entidade da requisição, e a sintaxe da requisição esta correta, mas não foi possível processar as instruções presentes."
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnError422"
+              
+          "400":
+            description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnError400"
+            
+          "500":
+            description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnError500"
+    
+    /user_info:
+      get:
+        tags:
+        - "Account Service"
+        summary: "Informações de um usuário no sistema."
+        description: "Rota responsável por obter informações de um usuário no sistema."
+        parameters:
+          - name: "user_name"
+            in: "query"
+            required: false
+            description: "nome de usuário"
+            schema:
+              type: "string"
+          - name: "user_id"
+            in: "query"
+            description: "id de usuário"
+            required: false
+            schema:
+              type: "integer"
+          
+            
+        responses:
+          200:
+            description: "successful operation"
+            content:
+              application/json:
+                schema:
+                  type: "object"
+                  properties:
+                    data:
+                      type: "object"
+                      properties:
+                        id:
+                          type: "integer"
+                          example: 1
+                        type: 
+                          type: "string"
+                          example: "users"
+                        attributes:
+                          type: "object"
+                          properties:
+                            active:
+                              type: "boolean"
+                              example: true
+                            email:
+                              type: "string"
+                              example: "my@email.com"
+                            name:
+                              type: "string"
+                              example: "myusername"
+                
+          "422":
+            description: "Indica que o servidor entende o tipo de conteúdo da entidade da requisição, e a sintaxe da requisição esta correta, mas não foi possível processar as instruções presentes."
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnError422"
+              
+          "400":
+            description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnError400"
+            
+          "500":
+            description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnError500"
+    
+    /update:
+      post:
+        tags:
+        - "Account Service"
+        summary: "Informações de um usuário no sistema."
+        description: "Rota responsável por obter informações de um usuário no sistema."
+        parameters:
+          - name: "user_name"
+            in: "query"
+            required: true
+            description: "nome de usuário"
+            schema:
+              type: "string"
+          - name: "old_password"
+            in: "query"
+            required: true
+            description: "senha atual do usuário"
+            schema:
+              type: "string"
+          - name: "user_id"
+            in: "query"
+            description: "id de usuário"
+            required: true
+            schema:
+              type: "integer"
+          - name: "new_data"
+            in: "query"
+            description: "novos dados de usuário"
+            required: false
+            schema:
+              type: "object"
+              properties:
+                email:
+                  type: "string"
+                  example: "new-email@gmail.com"
+                password:
+                  type: "string"
+                  example: "new_password"
+                user_name:
+                  type: "string"
+                  example: "novo_user_name"
+              
+          
+            
+        responses:
+          200:
+            description: "successful operation"
+            content:
+              application/json:
+                schema:
+                  type: "object"
+                  properties:
+                    type:
+                      type: "string"
+                      example: "users"
+                    updated:
+                      type: "boolean"
+                      example: true
+                      
+                
+          "422":
+            description: "Indica que o servidor entende o tipo de conteúdo da entidade da requisição, e a sintaxe da requisição esta correta, mas não foi possível processar as instruções presentes."
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnError422"
+              
+          "400":
+            description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnError400"
+            
+          "500":
+            description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnError500"
+  
+    /deactive_user:
+      post:
+        tags:
+        - "Account Service"
+        summary: "Desativar um usuário no sistema."
+        description: "Rota responsável por desativar um usuário no sistema."
+        parameters:
+          - name: "user_name"
+            in: "query"
+            required: true
+            description: "nome de usuário"
+            schema:
+              type: "string"
+          - name: "password"
+            in: "query"
+            required: true
+            description: "senha de usuário"
+            schema:
+              type: "string"
+          - name: "user_id"
+            in: "query"
+            description: "id de usuário"
+            required: true
+            schema:
+              type: "integer"
+          
+            
+        responses:
+          200:
+            description: "successful operation"
+            content:
+              application/json:
+                schema:
+                  type: "object"
+                  properties:
+                    type:
+                      type: "string"
+                      example: "users"
+                    deactivated:
+                      type: "boolean"
+                      example: true
+                      
+                
+          "422":
+            description: "Indica que o servidor entende o tipo de conteúdo da entidade da requisição, e a sintaxe da requisição esta correta, mas não foi possível processar as instruções presentes."
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnError422"
+              
+          "400":
+            description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnError400"
+            
+          "500":
+            description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnError500"
+  
+    /active_user:
+      post:
+        tags:
+        - "Account Service"
+        summary: "Ativar um usuário no sistema."
+        description: "Rota responsável por ativar um usuário no sistema."
+        parameters:
+          - name: "user_name"
+            in: "query"
+            required: true
+            description: "nome de usuário"
+            schema:
+              type: "string"
+          - name: "password"
+            in: "query"
+            required: true
+            description: "senha de usuário"
+            schema:
+              type: "string"
+          - name: "user_id"
+            in: "query"
+            description: "id de usuário"
+            required: true
+            schema:
+              type: "integer"
+          
+            
+        responses:
+          200:
+            description: "successful operation"
+            content:
+              application/json:
+                schema:
+                  type: "object"
+                  properties:
+                    type:
+                      type: "string"
+                      example: "users"
+                    activated:
+                      type: "boolean"
+                      example: true
+                      
+                
+          "422":
+            description: "Indica que o servidor entende o tipo de conteúdo da entidade da requisição, e a sintaxe da requisição esta correta, mas não foi possível processar as instruções presentes."
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnError422"
+              
+          "400":
+            description: "Indica que o servidor não pode ou não irá processar a requisição devido a alguma coisa que foi entendida como um erro do cliente (por exemplo, sintaxe de requisição mal formada, enquadramento de mensagem de requisição inválida ou requisição de roteamento enganosa)."
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnError400"
+            
+          "500":
+            description: "Indica que  encontrou uma condição inesperada e que o impediu de atender à solicitação."
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/returnError500"
+  
+  
+    
+    
+  components:
+    schemas:
+      
+      returnError422:
+        type: "object"
+        properties:
+          error:
+            type: "object"
+            properties:
+              status:
+                type: "integer"
+                format: "int32"
+                example: 422
+              title:
+                type: "object"
+                properties:
+                  error:
+                    type: "string"
+                    example: "Unprocessable Entity"
+      
+      returnError400:
+        type: "object"
+        properties:
+          error:
+            type: "object"
+            properties:
+              status:
+                type: "integer"
+                format: "int32"
+                example: 400
+              title:
+                type: "object"
+                properties:
+                  error:
+                    type: "string"
+                    example: "Bad Request"
+        
+      returnError500:
+        type: "object"
+        properties:
+          error:
+            type: "object"
+            properties:
+              status:
+                type: "integer"
+                format: "int32"
+                example: 500
+              title:
+                type: "object"
+                properties:
+                  error:
+                    type: "string"
+                    example: "Internal Server Error"
+      

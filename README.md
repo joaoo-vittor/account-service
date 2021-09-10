@@ -1,7 +1,7 @@
 <div align="center">
   <h1>Account Service — Microservice</h1>
   <h4>
-    <strong>Status do projeto: </strong> <i>Incompleto</i> 🚧 ⚠️ ⚠️
+    <strong>Status do projeto: </strong> <i>Completo</i> 🤓 🤓 🤓
   </h4>
   <a href="https://wakatime.com/badge/github/joaoo-vittor/account-service"><img src="https://wakatime.com/badge/github/joaoo-vittor/account-service.svg"></a>
 </div>
@@ -13,6 +13,11 @@
 Criar um microsserviço utilizando a *Clean Architecture*, o serviço é responsavel por *registrar um usuário*, por *logar usuário*, por fazer *update de usuário*, por *ativar usuário*, por *desativar usuário* e por *buscar usuário*.
 
 > Observação: O projeto ainda está em produção, sendo assim pode ocorrer mudanças.
+
+
+## Documentação das rotas
+
+> Documentação feita usando `swagger`: [Link Documentação](https://ecommerce-account-service-jvbs.herokuapp.com/api/v1/doc/)
 
 ----
 

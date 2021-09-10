@@ -12,8 +12,29 @@ class FindUser(FindUserInterface):
 
     def by_id_and_name(self, user_id: int, user_name: str) -> Dict[bool, User]:
         """Select User by user id and user name
-        :params - user_id: id of the user
-                - user_name: user name of User
+        :params
+                -- user_id: id of the user
+                -- user_name: user name of User
+
+        :return - Dictionary with informations of the process
+        """
+
+        response = None
+        validate_entry = isinstance(user_id, int) and isinstance(user_name, str)
+
+        if validate_entry:
+            response = self.user_repository.selected_user(
+                user_id=user_id, user_name=user_name
+            )
+        if response:
+            return {"Success": validate_entry, "Data": response}
+        return {"Success": False, "Data": response}
+
+    def by_id(self, user_id: int) -> Dict[bool, User]:
+        """Select User by user id and user name
+        :params
+                -- user_id: id of the user
+
         :return - Dictionary with informations of the process
         """
 
@@ -21,9 +42,24 @@ class FindUser(FindUserInterface):
         validate_entry = isinstance(user_id, int)
 
         if validate_entry:
-            response = self.user_repository.selected_user(
-                user_id=user_id, user_name=user_name
-            )
+            response = self.user_repository.selected_user(user_id=user_id)
+        if response:
+            return {"Success": validate_entry, "Data": response}
+        return {"Success": False, "Data": response}
+
+    def by_name(self, user_name: str) -> Dict[bool, User]:
+        """Select User by user id and user name
+        :params
+                -- user_name: user name of User
+
+        :return - Dictionary with informations of the process
+        """
+
+        response = None
+        validate_entry = isinstance(user_name, str)
+
+        if validate_entry:
+            response = self.user_repository.selected_user(user_name=user_name)
         if response:
             return {"Success": validate_entry, "Data": response}
         return {"Success": False, "Data": response}

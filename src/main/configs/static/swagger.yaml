@@ -1,9 +1,9 @@
   openapi: "3.0.1"
   
   info:
-    description: "Documentação das rotas da SEFAZ API"
+    description: "Documentação para o microsserviço Account."
     version: "1.0.0"
-    title: "SEFAZ API"
+    title: "ACCOUNT API"
   
   
   servers:

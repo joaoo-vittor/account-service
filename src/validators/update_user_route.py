@@ -13,8 +13,8 @@ def validate_update_user_route(query_params: any) -> bool:
                 "password": {"type": "string", "required": False},
                 "email": {
                     "type": "string",
-                    "required": False,
                     "regex": "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",
+                    "required": False,
                 },
                 "user_name": {"type": "string", "required": False},
             },

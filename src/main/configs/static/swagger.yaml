@@ -231,7 +231,7 @@
       put:
         tags:
         - "Account Service"
-        summary: "Informações de um usuário no sistema."
+        summary: "Atualizar dados de um usuário no sistema."
         description: "Rota responsável por obter informações de um usuário no sistema."
         parameters:
           - name: "user_name"

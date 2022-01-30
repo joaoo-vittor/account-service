@@ -22,16 +22,15 @@ class ActivateController(RouteInterface):
             validate_query = validate_activate_user_route(http_request.query)
 
             if validate_query:
-                user_id = http_request.query["user_id"]
                 user_name = http_request.query["user_name"]
                 password = http_request.query["password"]
 
                 response = self.activate_user_use_case.activate_user(
-                    user_id=user_id, user_name=user_name, password=password
+                    user_name=user_name, password=password
                 )
 
             else:
-                response = {"Success": False, "Data": None}
+                response = {"Success": False, "Data": response}
 
             if response["Success"] is False:
                 http_error = HttpErrors.error_422()

@@ -7,9 +7,7 @@ class ActivateUser(ABC):
     """Interface to ActivateUser use case"""
 
     @abstractclassmethod
-    def activate_user(
-        cls, user_id: int, user_name: str, password: str
-    ) -> Dict[bool, User]:
+    def activate_user(cls, user_name: str, password: str) -> Dict[bool, User]:
         """Specific Case"""
 
         raise Exception("Should implement method: deactivate_user")

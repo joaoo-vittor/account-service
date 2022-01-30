@@ -32,6 +32,6 @@ class UserRepositoryInterface(ABC):
         raise Exception("method not implemented")
 
     @abstractmethod
-    def reactivate_user(self, user_name: str, user_id: int, password: str) -> bool:
+    def reactivate_user(self, user_name: str, password: str) -> bool:
         """method to reactivate on user on database"""
         raise Exception("method not implemented")

@@ -181,28 +181,28 @@ class UserRepository(UserRepositoryInterface):
             connection.session.close()
 
     @classmethod
-    def reactivate_user(self, user_name: str, user_id: int, password: str) -> bool:
+    def reactivate_user(self, user_name: str, password: str) -> bool:
         """Activate user of database
         :params
-                -- user_id: Id of the registry
                 -- user_name: User name
                 -- password: password to verify
 
-        :return - Boolean to Users activate
+        :return
+                -- Boolean to Users activate
         """
         try:
-            if user_id and user_name and password:
+            if user_name and password:
                 with DBConnectionHandler() as connection:
                     user_verify = (
                         connection.session.query(UserModel)
-                        .filter_by(id=user_id, user_name=user_name)
+                        .filter_by(user_name=user_name)
                         .one()
                     )
 
                     pwhash = f"{HASH}{user_verify.password}"
                     if check_password_hash(pwhash, password):
                         connection.session.query(UserModel).filter_by(
-                            id=user_id, user_name=user_name
+                            user_name=user_name
                         ).update({"active": 1}, synchronize_session=False)
                         connection.session.commit()
                         return True

@@ -3,8 +3,10 @@ from sqlalchemy.engine import Engine
 from sqlalchemy.orm.session import Session
 from sqlalchemy.orm import sessionmaker
 from src.settings import SQLALCHEMY_DATABASE_URI
+from src.infra.singleton import singleton
 
 
+@singleton
 class DBConnectionHandler:
     """Sqlalchemy database connection"""
 
@@ -17,11 +19,11 @@ class DBConnectionHandler:
         :param - None
         :return - engine connection to Database
         """
-        engine = create_engine(self.__connection_string)
+        engine = create_engine(self.__connection_string, pool_size=10)
         return engine
 
     def __enter__(self):
-        engine = create_engine(self.__connection_string)
+        engine = create_engine(self.__connection_string, pool_size=10)
         session_maker = sessionmaker()
         self.session = session_maker(bind=engine)
         return self

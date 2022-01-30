@@ -3,3 +3,4 @@ from .api_adapter_find_user import flask_adapter_find_user
 from .api_adapter_update_user import flask_adapter_update_user
 from .api_adapter_deactivate_user import flask_adapter_deactivate_user
 from .api_adapter_activate_user import flask_adapter_activate_user
+from .api_adapter_login_user import flask_adapter_login_user

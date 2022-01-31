@@ -5,6 +5,7 @@ from src.domain.models import User
 from src.infra.config import DBConnectionHandler
 from src.infra.entites import Users as UserModel
 from src.settings import HASH
+from src.queue import publish
 
 
 class UserRepository(UserRepositoryInterface):
@@ -28,12 +29,19 @@ class UserRepository(UserRepositoryInterface):
                 connection.session.add(new_user)
                 connection.session.commit()
 
+                user = {
+                    "id": new_user.id,
+                    "user_name": new_user.user_name,
+                    "password": new_user.password,
+                    "email": new_user.email,
+                    "active": new_user.active,
+                    "type": new_user.type,
+                }
+
+                publish("created_user", user)
+
                 return User(
-                    id=new_user.id,
-                    user_name=new_user.user_name,
-                    password=new_user.password,
-                    email=new_user.email,
-                    active=new_user.active,
+                    **user,
                 )
 
             except:
@@ -84,11 +92,12 @@ class UserRepository(UserRepositoryInterface):
                 password=data.password,
                 email=data.email,
                 active=data.active,
+                type=data.type,
             )
 
         except NoResultFound:
             return None
-        except:
+        except Exception as e:
             connection.session.rollback()
             raise
         finally:

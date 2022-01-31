@@ -112,6 +112,7 @@ def user_info():
                     "name": response.body.user_name,
                     "email": response.body.email,
                     "active": response.body.active,
+                    "type": response.body.type,
                 },
             }
 

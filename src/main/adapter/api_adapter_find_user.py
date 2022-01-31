@@ -15,7 +15,6 @@ def flask_adapter_find_user(request: any, api_route: Type[Route]) -> any:
     try:
         params = {}
         token_identity = get_jwt_identity()
-        print(token_identity)
 
         if token_identity:
             params["user_name"] = str(token_identity["user_name"])

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, DateTime, Boolean
+from sqlalchemy import Column, String, Integer, DateTime, Boolean, Enum
 from sqlalchemy.sql import func
 from src.infra.config import Base
 
@@ -12,6 +12,7 @@ class Users(Base):
     user_name = Column(String(100), nullable=False, unique=True)
     email = Column(String(100), nullable=True, unique=True)
     password = Column(String(200), nullable=False)
+    type = Column(Enum("common", "seller"), nullable=False, default="common")
     active = Column(Boolean, default=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())

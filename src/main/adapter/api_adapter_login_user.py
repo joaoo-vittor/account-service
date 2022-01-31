@@ -22,15 +22,15 @@ def flask_adapter_login_user(request: any, api_route: Type[Route]) -> any:
         if "user_name" in query_string_params.keys():
             params["user_name"] = str(query_string_params["user_name"])
 
-        if "user_id" in query_string_params.keys():
-            params["user_id"] = int(query_string_params["user_id"])
+        # if "user_id" in query_string_params.keys():
+        #     params["user_id"] = int(query_string_params["user_id"])
 
-        if (
-            "user_id" in query_string_params.keys()
-            and "user_name" in query_string_params.keys()
-        ):
-            params["user_name"] = str(query_string_params["user_name"])
-            params["user_id"] = int(query_string_params["user_id"])
+        # if (
+        #     "user_id" in query_string_params.keys()
+        #     and "user_name" in query_string_params.keys()
+        # ):
+        #     params["user_name"] = str(query_string_params["user_name"])
+        #     params["user_id"] = int(query_string_params["user_id"])
 
     except:
         http_error = HttpErrors.error_400()

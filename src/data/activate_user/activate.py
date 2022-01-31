@@ -10,26 +10,21 @@ class ActivateUser(ActivateUserInterface):
     def __init__(self, user_repository: Type[UserRepository]) -> None:
         self.user_repository = user_repository
 
-    def activate_user(
-        self, user_id: int, user_name: str, password: str
-    ) -> Dict[bool, User]:
+    def activate_user(self, user_name: str, password: str) -> Dict[bool, User]:
         """Activate User
-        :params - user_id: id of the user
-                - user_name: user name of User
-                - password: password to verify deactivate
-        :return - Dictionary with informations of the process
+        :params
+                -- user_name: user name of User
+                -- password: password to verify deactivate
+        :return
+                -- Dictionary with informations of the process
         """
 
         response = None
-        validate_entry = (
-            isinstance(user_id, int)
-            and isinstance(user_name, str)
-            and isinstance(password, str)
-        )
+        validate_entry = isinstance(user_name, str) and isinstance(password, str)
 
         if validate_entry:
             response = self.user_repository.reactivate_user(
-                user_name=user_name, user_id=user_id, password=password
+                user_name=user_name, password=password
             )
 
         if response is not None:

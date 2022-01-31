@@ -12,16 +12,15 @@ def flask_adapter_activate_user(request: any, api_route: Type[Route]) -> any:
     """
 
     try:
+        params = {}
         query_string_params = request.get_json()
 
         if (
-            "user_id" in query_string_params.keys()
-            and "user_name" in query_string_params.keys()
+            "user_name" in query_string_params.keys()
             and "password" in query_string_params.keys()
         ):
-            query_string_params["user_id"] = int(query_string_params["user_id"])
-            query_string_params["user_name"] = str(query_string_params["user_name"])
-            query_string_params["password"] = str(query_string_params["password"])
+            params["user_name"] = str(query_string_params["user_name"])
+            params["password"] = str(query_string_params["password"])
 
     except:
         http_error = HttpErrors.error_400()
@@ -29,9 +28,7 @@ def flask_adapter_activate_user(request: any, api_route: Type[Route]) -> any:
             status_code=http_error["status_code"], body=http_error["body"]
         )
 
-    http_request = HttpRequest(
-        header=request.headers, body=request.json, query=query_string_params
-    )
+    http_request = HttpRequest(header=request.headers, body=request.json, query=params)
 
     try:
         response = api_route.route(http_request=http_request)

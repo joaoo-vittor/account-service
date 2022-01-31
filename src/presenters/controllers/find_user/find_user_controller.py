@@ -23,14 +23,18 @@ class FindUserController(RouteInterface):
 
             if validate_query:
 
-                if "user_id" in http_request.query.keys():
+                if (
+                    "user_name" not in http_request.query.keys()
+                    and "user_id" in http_request.query.keys()
+                ):
                     user_id = http_request.query["user_id"]
-
                     response = self.find_user_use_case.by_id(user_id=user_id)
 
-                if "user_name" in http_request.query.keys():
+                if (
+                    "user_name" in http_request.query.keys()
+                    and "user_id" not in http_request.query.keys()
+                ):
                     user_name = http_request.query["user_name"]
-
                     response = self.find_user_use_case.by_name(user_name=user_name)
 
                 if (
@@ -39,7 +43,6 @@ class FindUserController(RouteInterface):
                 ):
                     user_name = http_request.query["user_name"]
                     user_id = http_request.query["user_id"]
-
                     response = self.find_user_use_case.by_id_and_name(
                         user_name=user_name, user_id=user_id
                     )

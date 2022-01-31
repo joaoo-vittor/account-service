@@ -10,7 +10,7 @@
 
 ## Objetivo do projeto
 
-Criar um microsserviço utilizando a *Clean Architecture*, o serviço é responsavel por *registrar um usuário*, por *logar usuário*, por fazer *update de usuário*, por *ativar usuário*, por *desativar usuário* e por *buscar usuário*.
+Criar um microsserviço utilizando a *Clean Architecture*, o serviço é responsavel por *registrar um usuário*, por *logar usuário*, por fazer *update de usuário*, por *ativar usuário*, por *desativar usuário* e por *buscar usuário*. Mas também, compartilhar dados com um serviço de gerenciamento de produtos feito com `Node.js`. O compartilhamento de dados é feito através do [CloudAMQP](https://www.cloudamqp.com/), o qual é um cluster RabbitMQ.
 
 > Observação: O projeto ainda está em produção, sendo assim pode ocorrer mudanças.
 
@@ -53,9 +53,35 @@ soure venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Rodar testes
 
-Altere o arquivo `docker-compose.yaml`, substitua a linha com `command:` por `command: 'pytest -v -s'` e rode o comando abaixo:
+### Configurar variáveis de ambiente
+
+#### 1° Passo
+
+> Crie um arquivo .env na raiz do projeto
+
+```
+  /src
+    ...
+    /queue
+    /settings
+      .env
+    ...
+  ...
+```
+
+#### 2° Passo
+
+```
+SQLALCHEMY_DATABASE_URI=mysql+pymysql://root:root@db/user
+HASH=<tipo de algoritmo para gerar hash de senha>
+PRIVATE_KEY=<private key to generate token>
+AMQP_URL=<Sua AMQP URL>
+```
+
+> Crie um cluster RabbitMQ, na plataforma [CloudAMQP](https://www.cloudamqp.com/).
+
+### Rodar o serviço
 
 > Observação: É necessário ter o `docker` e o `docker-compose` instalado no seu computador.
 
@@ -64,5 +90,5 @@ Altere o arquivo `docker-compose.yaml`, substitua a linha com `command:` por `co
 🔗 Instalar o docker: [Link](https://docs.docker.com/get-docker/)
 
 ```
-docker-compose up account_service
+docker-compose up
 ```

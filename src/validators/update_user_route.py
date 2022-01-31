@@ -17,6 +17,11 @@ def validate_update_user_route(query_params: any) -> bool:
                     "required": False,
                 },
                 "user_name": {"type": "string", "required": False},
+                "type": {
+                    "type": "string",
+                    "required": False,
+                    "allowed": ["common", "seller"],
+                },
             },
         },
     }

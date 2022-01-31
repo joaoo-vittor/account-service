@@ -1,9 +1,9 @@
 <div align="center">
   <h1>Account Service — Microservice</h1>
   <h4>
-    <strong>Status do projeto: </strong> <i>Completo</i> 🤓 🤓 🤓
+    <strong>Status do projeto: </strong> <i>Incompleto</i> 🤓 🤓 🤓
   </h4>
-  <a href="https://wakatime.com/badge/github/joaoo-vittor/account-service"><img src="https://wakatime.com/badge/github/joaoo-vittor/account-service.svg"></a>
+  <!-- <a href="https://wakatime.com/badge/github/joaoo-vittor/account-service"><img src="https://wakatime.com/badge/github/joaoo-vittor/account-service.svg"></a> -->
 </div>
 
 ----
